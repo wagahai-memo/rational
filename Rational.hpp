@@ -64,6 +64,17 @@ public:
     normalize();
   }
 
+  ~Rational() = default;
+
+  constexpr Rational(const Rational& other) = default;
+  constexpr Rational(Rational&& other) = default;
+
+  constexpr Rational& operator =(const Rational& other) & = default;
+  constexpr Rational& operator =(Rational&& other) & = default;
+
+  constexpr Rational&& operator =(const Rational& other) && = delete;
+  constexpr Rational&& operator =(Rational&& other) && = delete;
+
 
   //------------------------------------------
   //

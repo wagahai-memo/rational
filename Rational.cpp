@@ -21,6 +21,13 @@ int main()
 
   static_assert(R<int>(2, -4) == R<int>(-1, 2), "");
   static_assert(R<int>(1, 3) < R<int>(1, 2), "");
+  static_assert(R<int>(-21, 3).isInteger(), "");
+  static_assert(R<int>().isZero(), "");
+  static_assert(R<int>(2, 3).numerator(), "");
+  static_assert(R<int>(2, 3).denominator(), "");
+  static_assert(+R<int>(2, 3) == R<int>(2, 3), "");
+  static_assert(-R<int>(2, 3) == R<int>(-2, 3), "");
+  std::cout << R<int>(2, 4).inverse() << std::endl;
 
   return 0;
 }

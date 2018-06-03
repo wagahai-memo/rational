@@ -76,6 +76,34 @@ public:
   constexpr Rational&& operator =(Rational&& other) && = delete;
 
 
+public:
+  //------------------------------------------
+  //
+  //  Arithmetic unary operator
+  //
+  //------------------------------------------
+  constexpr Rational operator +() const {
+    return Rational{*this};
+  }
+
+  constexpr Rational operator -() const {
+    Rational ret{*this};
+    ret.numerator_ = -ret.numerator_;
+    return ret;
+  }
+
+  constexpr Rational inverse() const {
+    Rational ret{*this};
+    if (numerator_ == static_cast<T>(0))
+      throw ZeroDivisorException();
+    T tmp = ret.numerator_;
+    ret.numerator_ = ret.denominator_;
+    ret.denominator_ = tmp;
+    ret.normalize();
+    return ret;
+  }
+
+
   //------------------------------------------
   //
   //  Logical operator
@@ -109,6 +137,31 @@ public:
 
   constexpr bool operator >=(const Rational& other) const {
     return !(*this < other);
+  }
+
+
+public:
+  //------------------------------------------
+  //
+  //  Element access
+  //
+  //------------------------------------------
+  constexpr const T& numerator() const {
+    return numerator_;
+  }
+
+  constexpr const T& denominator() const {
+    return denominator_;
+  }
+
+  // 整数ならtrue
+  constexpr bool isInteger() const {
+    return denominator_ == static_cast<T>(1);
+  }
+
+  // 零ならtrue
+  constexpr bool isZero() const {
+    return numerator_ == static_cast<T>(0);
   }
 
 

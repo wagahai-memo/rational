@@ -104,6 +104,66 @@ public:
   }
 
 
+public:
+  //------------------------------------------
+  //
+  //  Arithmetic assignment operator
+  //
+  //------------------------------------------
+  constexpr Rational& operator +=(const Rational& other) & {
+    numerator_ *= other.denominator_;
+    numerator_ += (other.numerator_ * denominator_);
+    denominator_ *= other.denominator_;
+    normalize();
+    return *this;
+  }
+
+  constexpr Rational& operator -=(const Rational& other) & {
+    return *this += -other;
+  }
+
+  constexpr Rational& operator *=(const Rational& other) & {
+    numerator_ *= other.numerator_;
+    denominator_ *= other.denominator_;
+    normalize();
+    return *this;
+  }
+
+  Rational& operator /=(const Rational& other) & {
+    return *this *= other.inverse();
+  }
+
+  constexpr Rational&& operator +=(const Rational& other) && = delete;
+  constexpr Rational&& operator -=(const Rational& other) && = delete;
+  constexpr Rational&& operator *=(const Rational& other) && = delete;
+  constexpr Rational&& operator /=(const Rational& other) && = delete;
+
+
+public:
+  //------------------------------------------
+  //
+  //  Arithmetic binary operator
+  //
+  //------------------------------------------
+  constexpr Rational operator +(const Rational& other) const {
+    Rational ret{*this};
+    return ret += other;
+  }
+
+  constexpr Rational operator -(const Rational& other) const {
+    return *this + -other;
+  }
+
+  constexpr Rational operator *(const Rational& other) const {
+    Rational ret{*this};
+    return ret *= other;
+  }
+
+  Rational operator /(const Rational& other) const {
+    return *this * other.inverse();
+  }
+
+
   //------------------------------------------
   //
   //  Logical operator

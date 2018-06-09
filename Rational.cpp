@@ -2,7 +2,7 @@
 #include "Rational.hpp"
 
 template <typename T>
-using R = mylib::rational::Rational<T>;
+using R = math::rational::Rational<T>;
 
 
 constexpr R<int> plus_eq(const R<int> x)

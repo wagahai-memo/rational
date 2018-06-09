@@ -1,11 +1,11 @@
-#ifndef MYLIB_RATIONAL_HPP_
-#define MYLIB_RATIONAL_HPP_
+#ifndef MATH_RATIONAL_HPP_
+#define MATH_RATIONAL_HPP_
 #include <ostream>
 #include "../ZeroDivisorException.hpp"
 #include "../integer/gcd.hpp"
 
 
-namespace mylib {
+namespace math {
 namespace rational {
 
 template <typename T>
